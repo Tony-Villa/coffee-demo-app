@@ -2,14 +2,25 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   type Query {
-    coffeBeans: [CoffeBeans!]!
+    coffeeBeans: [CoffeeBeans!]!
   }
 
-  type CoffeBeans {
+  type Mutation {
+    # Post Mutations
+    reviewCreate(review: ReviewInput): ReviewPayload!
+    reviewUpdate(reviewId: ID!, review: ReviewInput): ReviewPayload!
+    reviewDelete(reviewId: ID!): ReviewPayload!
+    # User Mutations
+    signup(email: String!, password: String!, name: String!, bio: String!): AuthPayload!
+    signin(credentials: CredentialsInput): AuthPayload!
+  }
+
+  type CoffeeBeans {
     id: ID!
     name: String!
     origin: String!
     description: String!
+    roast: String!
     tastingNotes: [String!]!
     picture: String!
     price: Int!
@@ -30,7 +41,13 @@ export const typeDefs = gql`
     title: String!
     content: String!
     createdAt: String!
+    coffeeBeans: CoffeeBeans!
     user: User!
+  }
+
+  type ReviewPayload {
+    userErrors: [UserError!]!
+    review: Review
   }
 
   type User {
@@ -38,5 +55,25 @@ export const typeDefs = gql`
     name: String!
     email: String!
     reviews: [Review!]!
+  }
+
+  type UserError {
+    message: String!
+  }
+
+  type AuthPayload {
+    userErrors: [UserError!]!
+    token: String
+  }
+
+  input ReviewInput {
+    title: String!
+    content: String!
+    coffeeBeans: CoffeeBeans
+  }
+
+  input CredentialsInput {
+    email: String!
+    password: String!
   }
 `;

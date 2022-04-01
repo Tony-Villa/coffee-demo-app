@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CoffeeBeans {
+  id            String     @id @default(uuid())
+  name          String
+  description   String
+  roast         String
+  tastingNotes  String[]
+  pitcure       String?
+  price         Int
+  grindId       String
+  grindSize     GrindSize?
+  reviews       Review[]
+}
+
+model Review {
+  id            String     @id @default(uuid())
+  title         String
+  content       String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  userId        String
+  user          User    @relation(fields: [userId], references: [id])
+  coffeeId      String
+  coffeeBeans   CoffeeBeans @relation(fields: [coffeeId], references: [id])
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String
+  password      String    
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  reviews       Review[]  
+}
+
+model GrindSize {
+  id            String     @id @default(uuid())
+  grinderName   String
+  espresso      Int
+  pourOver      Int
+  frenchPress   Int
+  coffeeId      String
+  CoffeeBeans   CoffeeBeans? @relation(fields: [coffeeId], references: [id])
+}
