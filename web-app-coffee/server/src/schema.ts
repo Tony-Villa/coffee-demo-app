@@ -8,7 +8,11 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    # Post Mutations
+
+    # Coffee Beans Mutations
+    coffeeCreate(coffee: )
+
+    # Review Mutations
     reviewCreate(review: ReviewInput!): ReviewPayload!
     reviewUpdate(reviewId: ID!, review: ReviewInput!): ReviewPayload!
     reviewDelete(reviewId: ID!): ReviewPayload!
