@@ -99,4 +99,34 @@ export const Mutation = {
       }),
     };
   },
+
+  reviewDelete: async (_: any, { reviewId }: { reviewId: string }, { prisma }: Context): Promise<ReviewPayloadType> => {
+    const existingReview = await prisma.review.findUnique({
+      where: {
+        id: reviewId,
+      },
+    });
+
+    if (!existingReview) {
+      return {
+        userErrors: [
+          {
+            message: 'Review does not exist',
+          },
+        ],
+        review: null,
+      };
+    }
+
+    await prisma.review.delete({
+      where: {
+        id: reviewId,
+      },
+    });
+
+    return {
+      userErrors: [],
+      review: null,
+    };
+  },
 };
