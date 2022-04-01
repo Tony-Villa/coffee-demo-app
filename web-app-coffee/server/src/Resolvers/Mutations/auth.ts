@@ -98,6 +98,8 @@ export const authResolvers = {
   signin: async (_: any, { credentials }: SignInArgs, { prisma }: Context): Promise<UserPayload> => {
     const { email, password } = credentials;
 
+    // console.log(password);
+
     const user = await prisma.user.findUnique({
       where: {
         email: email,
@@ -115,7 +117,7 @@ export const authResolvers = {
       };
     }
 
-    const passMatch = bcrypt.compare(password, user.password);
+    const passMatch = await bcrypt.compare(password, user.password);
 
     if (!passMatch) {
       return {

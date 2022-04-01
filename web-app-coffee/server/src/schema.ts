@@ -8,9 +8,8 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-
     # Coffee Beans Mutations
-    coffeeCreate(coffee: )
+    coffeeCreate(coffee: CoffeeBeanInput): CoffeeBeanPayload!
 
     # Review Mutations
     reviewCreate(review: ReviewInput!): ReviewPayload!
@@ -18,7 +17,7 @@ export const typeDefs = gql`
     reviewDelete(reviewId: ID!): ReviewPayload!
 
     # User Mutations
-    signup(email: String!, password: String!, name: String!, bio: String!): AuthPayload!
+    signup(email: String!, password: String!, name: String!): AuthPayload!
     signin(credentials: CredentialsInput): AuthPayload!
   }
 
@@ -33,6 +32,22 @@ export const typeDefs = gql`
     price: Int!
     grindSize: GrindSizeRec!
     reviews: [Review!]!
+  }
+
+  input CoffeeBeanInput {
+    name: String
+    origin: String
+    description: String
+    roast: String
+    tastingNotes: [String!]!
+    picture: String
+    price: Int
+    grindSize: String
+  }
+
+  type CoffeeBeanPayload {
+    userErrors: [UserError!]!
+    coffeeBeans: CoffeeBeans
   }
 
   type GrindSizeRec {

@@ -12,6 +12,7 @@ datasource db {
 
 model CoffeeBeans {
   id            String     @id @default(uuid())
+  roaster       String?
   name          String
   description   String
   roast         String
