@@ -14,6 +14,7 @@ model CoffeeBeans {
   id            String     @id @default(uuid())
   roaster       String?
   name          String
+  origin        String?
   description   String
   roast         String
   tastingNotes  String[]
@@ -26,6 +27,7 @@ model CoffeeBeans {
 
 model Review {
   id            String     @id @default(uuid())
+  rating        Int?     
   title         String
   content       String
   createdAt     DateTime  @default(now())

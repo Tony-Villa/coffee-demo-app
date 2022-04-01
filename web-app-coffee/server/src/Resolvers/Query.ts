@@ -15,6 +15,12 @@ export const Query = {
 
     return reviews;
   },
+
+  coffeeBeans: async (_: any, __: any, { prisma }: Context) => {
+    const coffeeBeans = await prisma.coffeeBeans.findMany({});
+
+    return coffeeBeans;
+  },
 };
 
 /*

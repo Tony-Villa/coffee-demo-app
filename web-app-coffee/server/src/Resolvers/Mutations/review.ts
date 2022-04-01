@@ -3,6 +3,7 @@ import { Context } from '../../index';
 
 interface ReviewArgs {
   review: {
+    rating?: number;
     title?: string;
     content?: string;
     coffeeBeans: string;
@@ -18,9 +19,9 @@ interface ReviewPayloadType {
 
 export const reviewResolvers = {
   reviewCreate: async (_: any, { review }: ReviewArgs, { prisma }: Context): Promise<ReviewPayloadType> => {
-    const { title, content, coffeeBeans } = review;
+    const { rating, title, content, coffeeBeans } = review;
 
-    if (!title || !content) {
+    if (!title || !content || !rating) {
       return {
         userErrors: [
           {
@@ -49,7 +50,7 @@ export const reviewResolvers = {
     { reviewId, review }: { reviewId: string; review: ReviewArgs['review'] },
     { prisma }: Context
   ): Promise<ReviewPayloadType> => {
-    const { title, content } = review;
+    const { title, content, rating } = review;
 
     if (!title && !content) {
       return {
@@ -82,10 +83,12 @@ export const reviewResolvers = {
     let payloadToUpdate = {
       title,
       content,
+      rating,
     };
 
     if (!title) delete payloadToUpdate.title;
     if (!content) delete payloadToUpdate.content;
+    if (!rating) delete payloadToUpdate.rating;
 
     return {
       userErrors: [],
