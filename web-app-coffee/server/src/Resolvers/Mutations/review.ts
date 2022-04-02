@@ -18,8 +18,19 @@ interface ReviewPayloadType {
 }
 
 export const reviewResolvers = {
-  reviewCreate: async (_: any, { review }: ReviewArgs, { prisma }: Context): Promise<ReviewPayloadType> => {
+  reviewCreate: async (_: any, { review }: ReviewArgs, { prisma, userInfo }: Context): Promise<ReviewPayloadType> => {
     const { rating, title, content, coffeeBeans } = review;
+
+    // if (!userInfo) {
+    //   return {
+    //     userErrors: [
+    //       {
+    //         message: 'Forbidden Access. Unauthorized',
+    //       },
+    //     ],
+    //     review: null,
+    //   };
+    // }
 
     if (!title || !content || !rating) {
       return {
@@ -36,9 +47,10 @@ export const reviewResolvers = {
       userErrors: [],
       review: prisma.review.create({
         data: {
+          rating,
           title,
           content,
-          userId: '1',
+          userId: '2ecf6111-d0e1-4d54-8ece-ca8523ab13ba',
           coffeeId: coffeeBeans,
         },
       }),

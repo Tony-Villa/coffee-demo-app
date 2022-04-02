@@ -15,7 +15,7 @@ interface CoffeeArgs {
   };
 }
 
-interface CoffeePayloadType {
+interface CoffeeBeanPayloadType {
   userErrors: {
     message: string;
   }[];
@@ -23,7 +23,7 @@ interface CoffeePayloadType {
 }
 
 export const coffeeResolvers = {
-  coffeeCreate: async (_: any, { coffee }: CoffeeArgs, { prisma }: Context): Promise<CoffeePayloadType> => {
+  coffeeCreate: async (_: any, { coffee }: CoffeeArgs, { prisma }: Context): Promise<CoffeeBeanPayloadType> => {
     const { roaster, name, origin, description, roast, tastingNotes, picture, price, grindId } = coffee;
 
     if (!roaster || !name || !origin || !description || !roast || !tastingNotes || !picture || !price || !grindId) {

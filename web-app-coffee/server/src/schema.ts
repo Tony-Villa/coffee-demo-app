@@ -75,6 +75,7 @@ export const typeDefs = gql`
   }
 
   input ReviewInput {
+    rating: Int
     title: String
     content: String
     coffeeBeans: String
