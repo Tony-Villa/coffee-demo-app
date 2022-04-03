@@ -5,7 +5,7 @@ interface ReviewUserParentType {
   userId: string;
 }
 interface ReviewCoffeeParentType {
-  coffeeId: string;
+  id: string;
 }
 
 export const Review = {
@@ -17,12 +17,12 @@ export const Review = {
     });
   },
 
-  coffeeBeans: (parent: ReviewCoffeeParentType, __: any, { prisma }: Context) => {
-    return coffeeLoader.load(parent.coffeeId);
+  coffeeBean: (parent: ReviewCoffeeParentType, __: any, { prisma }: Context) => {
+    return coffeeLoader.load(parent.id);
 
     // return prisma.coffeeBeans.findUnique({
     //   where: {
-    //     id: parent.coffeeId,
+    //     id: parent.id,
     //   },
     // });
   },

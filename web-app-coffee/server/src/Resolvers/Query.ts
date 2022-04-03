@@ -21,6 +21,16 @@ export const Query = {
 
     return coffeeBeans;
   },
+
+  coffeeBean: async (_: any, { id }: { id: string }, { prisma }: Context) => {
+    const coffeeBean = await prisma.coffeeBeans.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    return coffeeBean;
+  },
 };
 
 /*

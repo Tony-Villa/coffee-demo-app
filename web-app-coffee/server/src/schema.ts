@@ -3,6 +3,7 @@ import { gql } from 'apollo-server';
 export const typeDefs = gql`
   type Query {
     coffeeBeans: [CoffeeBeans!]!
+    coffeeBean(id: ID!): CoffeeBeans
     reviews: [Review!]!
     hello: String
   }
@@ -65,7 +66,7 @@ export const typeDefs = gql`
     title: String!
     content: String!
     createdAt: String!
-    coffeeBeans: CoffeeBeans
+    coffeeBean: CoffeeBeans
     user: User!
   }
 
