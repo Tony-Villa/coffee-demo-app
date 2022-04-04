@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
 });
 
@@ -23,3 +23,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+//authLink.concat(httpLink)

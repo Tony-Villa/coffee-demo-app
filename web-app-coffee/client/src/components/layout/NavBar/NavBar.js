@@ -8,7 +8,7 @@ const NavBar = () => {
         <li className="link"></li>
         <li className="link"></li>
         <li className="link">
-          <i class="fa-solid fa-cart-shopping"></i>
+          <i className="fa-solid fa-cart-shopping"></i>
         </li>
       </ul>
     </nav>

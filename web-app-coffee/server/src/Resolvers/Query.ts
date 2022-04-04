@@ -31,6 +31,14 @@ export const Query = {
 
     return coffeeBean;
   },
+
+  featuredBeans: async (_: any, __: any, { prisma }: Context) => {
+    const featured = await prisma.coffeeBeans.findMany({
+      take: 3,
+    });
+
+    return featured;
+  },
 };
 
 /*

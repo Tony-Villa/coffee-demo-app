@@ -4,6 +4,7 @@ export const typeDefs = gql`
   type Query {
     coffeeBeans: [CoffeeBeans!]!
     coffeeBean(id: ID!): CoffeeBeans
+    featuredBeans: [CoffeeBeans!]!
     reviews: [Review!]!
     hello: String
   }
